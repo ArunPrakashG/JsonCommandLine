@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JsonCommandLine.Demo", "JsonCommandLine.Demo\JsonCommandLine.Demo.csproj", "{6F130310-99F6-4BBA-8313-188B7A3FFACC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{0DBB5ACC-C8FB-4F66-943A-A2FE27AB3D3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DBB5ACC-C8FB-4F66-943A-A2FE27AB3D3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DBB5ACC-C8FB-4F66-943A-A2FE27AB3D3B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F130310-99F6-4BBA-8313-188B7A3FFACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F130310-99F6-4BBA-8313-188B7A3FFACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F130310-99F6-4BBA-8313-188B7A3FFACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F130310-99F6-4BBA-8313-188B7A3FFACC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

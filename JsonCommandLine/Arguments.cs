@@ -1,4 +1,3 @@
-using JsonCommandLine.Interfaces;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +8,22 @@ namespace JsonCommandLine {
 		public string CurrentExecutableDirectory { get; internal set; }
 
 		[JsonProperty]
-		public List<ICommandLineArgument> ArgumentCollection { get; internal set; }
+		public List<CommandLineArgument> ArgumentCollection { get; internal set; }
 
 		[JsonProperty]
 		public bool ArgumentsExist => ArgumentCollection != null && ArgumentCollection.Count > 0;
 
-		internal Arguments(List<ICommandLineArgument> arguments) {
+		internal Arguments(List<CommandLineArgument> arguments) {
 			ArgumentCollection = arguments;
 		}
 
-		internal Arguments(params ICommandLineArgument[] arguments) {
+		internal Arguments(params CommandLineArgument[] arguments) {
 			ArgumentCollection = arguments.ToList();
 		}
 
 		[JsonConstructor]
 		public Arguments() {
-			ArgumentCollection = new List<ICommandLineArgument>();
-		}		
+			ArgumentCollection = new List<CommandLineArgument>();
+		}
 	}
 }

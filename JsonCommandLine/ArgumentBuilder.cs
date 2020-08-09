@@ -1,28 +1,29 @@
-﻿using JsonCommandLine.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
 namespace JsonCommandLine {
 	public class ArgumentBuilder {
-		private readonly List<ICommandLineArgument> SingleArguments = new List<ICommandLineArgument>();
+		private readonly List<CommandLineArgument> SingleArguments = new List<CommandLineArgument>();
 
-		public ArgumentBuilder(List<ICommandLineArgument> args) => SingleArguments = args;
+		public ArgumentBuilder(List<CommandLineArgument> args) => SingleArguments = args;
 
-		public ArgumentBuilder(params ICommandLineArgument[] args) => SingleArguments = args.ToList();
+		public ArgumentBuilder(params CommandLineArgument[] args) => SingleArguments = args.ToList();
 
-		public ArgumentBuilder(ICommandLineArgument arg) {
+		public ArgumentBuilder(CommandLineArgument arg) {
 			SingleArguments.Add(arg);
 		}
 
 		public ArgumentBuilder() { }
 
-		public void Add(ICommandLineArgument arg) {
+		public ArgumentBuilder Add(CommandLineArgument arg) {
 			if (arg == null) {
-				return;
+				throw new NullReferenceException(nameof(arg));
 			}
 
 			SingleArguments.Add(arg);
+			return this;
 		}
 
 		public Arguments Build() {

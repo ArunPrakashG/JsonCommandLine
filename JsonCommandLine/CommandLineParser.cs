@@ -1,4 +1,4 @@
-﻿using JsonCommandLine.Exceptions;
+using JsonCommandLine.Exceptions;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,6 +9,7 @@ namespace JsonCommandLine {
 		private readonly IEnumerable<string> Arguments;
 		public readonly bool IsJsonType;
 		public readonly string ExecutablePath;
+		public readonly bool DoesExist;
 
 		public CommandLineParser(string envCommandLine) {
 			if (string.IsNullOrEmpty(envCommandLine)) {
@@ -19,7 +20,8 @@ namespace JsonCommandLine {
 
 			// First element is always the app path
 			ExecutablePath = Arguments.FirstOrDefault() ?? throw new NullReferenceException(nameof(ExecutablePath));
-			IsJsonType = Arguments.ElementAt(1).StartsWith("{") && Arguments.ElementAt(1).EndsWith("}");
+			DoesExist = Arguments.Count() > 1;
+			IsJsonType = DoesExist ? Arguments.ElementAt(1).StartsWith("{") && Arguments.ElementAt(1).EndsWith("}") : false;
 		}
 
 		public Arguments Parse() {
