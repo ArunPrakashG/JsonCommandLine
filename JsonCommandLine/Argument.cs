@@ -1,8 +1,9 @@
+using JsonCommandLine.Interfaces;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace JsonCommandLine {
-	public class Argument : ISingleArgument {
+	public class Argument : ICommandLineArgument {
 		[JsonProperty]
 		public string BaseCommand { get; set; }
 

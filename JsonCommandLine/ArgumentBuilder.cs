@@ -1,28 +1,24 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using JsonCommandLine.Interfaces;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
 namespace JsonCommandLine {
 	public class ArgumentBuilder {
-		private readonly List<ISingleArgument> SingleArguments = new List<ISingleArgument>();
+		private readonly List<ICommandLineArgument> SingleArguments = new List<ICommandLineArgument>();
 
-		public ArgumentBuilder(List<ISingleArgument> args) => SingleArguments = args;
+		public ArgumentBuilder(List<ICommandLineArgument> args) => SingleArguments = args;
 
-		public ArgumentBuilder(params ISingleArgument[] args) => SingleArguments = args.ToList();
+		public ArgumentBuilder(params ICommandLineArgument[] args) => SingleArguments = args.ToList();
 
-		public ArgumentBuilder(ISingleArgument arg) {
+		public ArgumentBuilder(ICommandLineArgument arg) {
 			SingleArguments.Add(arg);
 		}
 
 		public ArgumentBuilder() { }
 
-		public void Add(ISingleArgument arg) {
-			if(arg == null) {
+		public void Add(ICommandLineArgument arg) {
+			if (arg == null) {
 				return;
 			}
 
@@ -30,9 +26,13 @@ namespace JsonCommandLine {
 		}
 
 		public Arguments Build() {
-			Arguments args = new Arguments(SingleArguments);
-			args.CurrentExecutableDirectory = Assembly.GetExecutingAssembly().Location;
+			Arguments args = new Arguments(SingleArguments) {
+				CurrentExecutableDirectory = Assembly.GetExecutingAssembly().Location
+			};
+
 			return args;
 		}
+
+		public string BuildAsArgument() => this.Build().AsArgument();
 	}
 }

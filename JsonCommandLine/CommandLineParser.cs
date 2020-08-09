@@ -2,22 +2,21 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace JsonCommandLine {
-	public class Parser : IDisposable {
+	public class CommandLineParser : IDisposable {
 		private readonly IEnumerable<string> Arguments;
 		public readonly bool IsJsonType;
 		public readonly string ExecutablePath;
 
-		public Parser(string envCommandLine) {
+		public CommandLineParser(string envCommandLine) {
 			if (string.IsNullOrEmpty(envCommandLine)) {
 				throw new ArgumentNullException(nameof(envCommandLine));
 			}
 
 			Arguments = SplitEnvironmentArgs(envCommandLine);
-			
+
 			// First element is always the app path
 			ExecutablePath = Arguments.FirstOrDefault() ?? throw new NullReferenceException(nameof(ExecutablePath));
 			IsJsonType = Arguments.ElementAt(1).StartsWith("{") && Arguments.ElementAt(1).EndsWith("}");
@@ -28,19 +27,7 @@ namespace JsonCommandLine {
 				throw new IncorrectTypeException();
 			}
 
-			return JsonConvert.DeserializeObject<Arguments>(ArgUnescape(Arguments.ElementAt(1)));
-		}
-
-		private string ArgUnescape(string arg) => arg.Replace('\'', '"');
-
-		public string GetArgsObject() => JsonConvert.SerializeObject(this, Formatting.None).Replace('"', '\'');
-
-		public static string GetArgsObject(Arguments argumentBuilder) {
-			if (argumentBuilder == null) {
-				throw new NullReferenceException(nameof(argumentBuilder));
-			}
-
-			return argumentBuilder.GetArgsObject();
+			return JsonConvert.DeserializeObject<Arguments>(Extensions.ArgUnescape(Arguments.ElementAt(1)));
 		}
 
 		private IEnumerable<string> SplitEnvironmentArgs(string cmdLine) {
@@ -51,6 +38,6 @@ namespace JsonCommandLine {
 			return cmdLine.Split(' ').Where(x => !string.IsNullOrEmpty(x));
 		}
 
-		public void Dispose() {	}
+		public void Dispose() { }
 	}
 }
