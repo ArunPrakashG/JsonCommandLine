@@ -5,6 +5,11 @@
 Provides a simple and easy API to pass JSON command line arguments.
 and yes, it can parse arguments which are generated like so too!
 
+JsonCommandLine library works little bit differently compared to other CommandLine parsers.
+Every argument must have a base `Command` keyword. It can have multiple parameters.
+Command keyword is used to identify the argument and the parameters are used to pass values with reference to command keyword.
+`Parameters` are stored in `Dictionary<string,string>()` while `BaseArgument` is a single `string`
+
 ### Sample usage
 
 ```cs
