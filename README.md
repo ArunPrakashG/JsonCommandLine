@@ -68,3 +68,6 @@ static void Main(string[] args) {
 				.AsArgument();
 		}
 ```
+
+- Dependencies 
+  - Newtonsoft.Json (>= 12.0.3)
