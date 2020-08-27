@@ -21,7 +21,7 @@ namespace JsonCommandLine {
 			// First element is always the app path
 			ExecutablePath = Arguments.FirstOrDefault() ?? throw new NullReferenceException(nameof(ExecutablePath));
 			DoesExist = Arguments.Count() > 1;
-			IsJsonType = DoesExist ? Arguments.ElementAt(1).StartsWith("{") && Arguments.ElementAt(1).EndsWith("}") : false;
+			IsJsonType = DoesExist && Arguments.ElementAt(1).StartsWith("{") && Arguments.ElementAt(1).EndsWith("}");
 		}
 
 		public Arguments Parse() {
